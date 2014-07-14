@@ -43,16 +43,19 @@ function createServer(port) {
       res.setHeader("Access-Control-Allow-Origin", "*");
       res.end('OK!');
 
-      console.log(body);
-
-      var formData = JSON.parse(body);
-      detectCommand(formData)
+      if (body.length > 0) {
+        console.log(body);
+        var formData = JSON.parse(body);
+        detectCommand(formData)
+      }
     });
   }).listen(port)
 }
 
 function start() {
-  createServer(8080)
+  var port = Number(process.env.PORT || 8080);
+  console.log("Started on port " + port)
+  createServer(port);
 }
 
 start()
