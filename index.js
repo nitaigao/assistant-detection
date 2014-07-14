@@ -30,10 +30,13 @@ function detectCommand(command) {
     if (!error && response.statusCode == 200) {
       console.log(body)
       var message = JSON.parse(body)
-      var resultData = JSON.stringify({result: body})
+      console.log(message)
+
       if (command.callback != undefined) {
+        var resultData = JSON.stringify({result: body})
         request.post(command.callback, {body: resultData})
       }
+
       var routeCommand = {"category": message.outcomes.intent, "commands": message.outcomes.entities}
       sendToRouter(routeCommand)
     }
