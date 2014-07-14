@@ -10,6 +10,7 @@ var ROUTER_URL = {
 }
 
 function sendToRouter(command) {
+  console.log("Sending To Router:\n" + command)
   request.post(ROUTER_URL[process.env.NODE_ENV], {body: JSON.stringify(command)}, function (err, response, body) {
     if (err) {
       console.error("Unable to reach router")
