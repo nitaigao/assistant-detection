@@ -9,7 +9,6 @@ var ROUTER_URL = {
   "production" : "http://assistant-router.herokuapp.com"
 }
 
-
 function sendToRouter(command) {
   request.post(ROUTER_URL[process.env.NODE_ENV], {body: JSON.stringify(command)}, function (err, response, body) {
     if (err) {
