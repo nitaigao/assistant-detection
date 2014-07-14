@@ -2,8 +2,16 @@ var http = require('http');
 var qs = require('querystring');
 var request = require('request');
 
+process.env.NODE_ENV = process.env.NODE_ENV || "development"
+
+var ROUTER_URL = {
+  "development": "http://localhost:8081",
+  "production" : "http://assistant-router.herokuapp.com"
+}
+
+
 function sendToRouter(command) {
-  request.post("http://localhost:8081", {body: JSON.stringify(command)}, function (err, response, body) {
+  request.post(ROUTER_URL[process.env.NODE_ENV], {body: JSON.stringify(command)}, function (err, response, body) {
     if (err) {
       console.error("Unable to reach router")
       return console.error(err);
