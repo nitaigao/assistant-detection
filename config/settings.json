@@ -1,17 +1,23 @@
 {
   "default": {
     "urls" : {
-      "router"  : "http://localhost:8081"
+      "light_control"  : "http://localhost:8100",
+      "weather"        : "http://localhost:8101",
+      "temperature"    : "http://localhost:8102"
     }
   },
   "development": {
     "urls" : {
-      "router"  : "http://localhost:8081"
+      "light_control"  : "http://localhost:8100",
+      "weather"        : "http://localhost:8101",
+      "temperature"    : "http://localhost:8102"
     }
   },
   "production": {
     "urls" : {
-      "router"  : "http://assistant-router.herokuapp.com"
+      "light_control"  : "http://assistant-light-control.herokuapp.com",
+      "temperature"    : "http://assistant-temperature.herokuapp.com",
+      "weather"        : "http://assistant-weather.herokuapp.com"
     }
   }
 }
