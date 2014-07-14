@@ -25,8 +25,7 @@ function detectCommand(command) {
       if (command.callback != undefined) {
         request.post(command.callback, {body: resultData})
       }
-      console.log(body)
-      var routeCommand = {"category": message.outcome.intent, "commands": message.outcome.entities}
+      var routeCommand = {"category": message.outcomes.intent, "commands": message.outcomes.entities}
       sendToRouter(routeCommand)
     }
   })
