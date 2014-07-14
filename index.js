@@ -19,6 +19,7 @@ function detectCommand(command) {
 
   request(options, function (error, response, body) {
     if (!error && response.statusCode == 200) {
+      console.log(body)
       var message = JSON.parse(body)
       var resultData = JSON.stringify({result: body})
       if (command.callback != undefined) {
