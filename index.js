@@ -36,7 +36,7 @@ function detectCommand(command) {
         request.post(command.callback, {body: resultData})
       }
 
-      for (var i = 0 l i < message.outcomes.length; i++) {
+      for (var i = 0; i < message.outcomes.length; i++) {
         console.log(message.outcomes[i].intent)
         var routeCommand = {"category": message.outcomes[i].intent, "commands": message.outcomes[i].entities}
         sendToRouter(routeCommand)
