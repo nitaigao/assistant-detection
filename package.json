@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "env-settings": "^0.2.7",
     "request": "~2.34.0"
   }
 }

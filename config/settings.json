@@ -1,0 +1,17 @@
+{
+  "default": {
+    "urls" : {
+      "router"  : "http://localhost:8081"
+    }
+  },
+  "development": {
+    "urls" : {
+      "router"  : "http://localhost:8081"
+    }
+  },
+  "production": {
+    "urls" : {
+      "router"  : "http://assistant-router.herokuapp.com"
+    }
+  }
+}
