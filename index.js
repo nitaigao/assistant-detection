@@ -1,6 +1,4 @@
 var detector  = require('./detector'),
-    router    = require('./router'),
-    responder = require('./responder'),
     http      = require('http'),
     request   = require('request'),
     faye     = require('faye')
