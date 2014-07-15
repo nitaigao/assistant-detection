@@ -1,39 +1,28 @@
-var detector = require('./detector'),
-    router   = require('./router'),
-    http     = require('http'),
-    request  = require('request')
+var detector  = require('./detector'),
+    router    = require('./router'),
+    responder = require('./responder'),
+    http      = require('http'),
+    request   = require('request'),
+    faye     = require('faye')
 ;
-
-function createServer(port) {
-  http.createServer(function (req, res) {
-    var body = "";
-
-    req.on('data', function (chunk) {
-      body += chunk;
-    })
-
-    req.on('end', function () {
-      res.setHeader("Access-Control-Allow-Origin", "*");
-      res.end('OK!');
-
-      if (body.length > 0) {
-        var sentence = JSON.parse(body);
-        detector.detect(sentence.text, function(command) {
-          if (sentence.callback != undefined) {
-            var result = JSON.stringify({result: command})
-            request.post(sentence.callback, {body: result})
-          }
-          router.route(command);
-        });
-      }
-    });
-  }).listen(port)
-}
 
 function start() {
   var port = Number(process.env.PORT || 8080);
-  console.log("Started on port " + port)
-  createServer(port);
+
+  var server = http.createServer();
+  server.listen(port);
+
+  console.log("Started on port " + port);
+
+  bayeux = new faye.NodeAdapter({mount: '/'});
+  bayeux.attach(server);
+
+  bayeux.getClient().subscribe('/messages', function(message) {
+    detector.detect(message, function(command) {
+      var channel = '/' + command.category;
+      bayeux.getClient().publish(channel, JSON.stringify(command));
+    });
+  });
 }
 
 start()
